@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -620,6 +620,8 @@ MonoBehaviour:
   Player: {fileID: 241899263}
   Pawn: {fileID: 1076242724}
   distance: 4
+  SphereCollider: {fileID: 0}
+  _animator: {fileID: 2010868087}
 --- !u!4 &1076242728
 Transform:
   m_ObjectHideFlags: 0

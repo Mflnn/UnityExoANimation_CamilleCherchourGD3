@@ -40,6 +40,7 @@ public class AIController : MonoBehaviour
     {
         CheckTransition();
         Behavior();
+        Debug.Log(_state);
     }
 
     private void Behavior()
@@ -56,14 +57,14 @@ public class AIController : MonoBehaviour
                 _speed = _agent.velocity.magnitude;
                 _animator.SetFloat("Speed", _speed);
                 Debug.Log(_waypoint1.transform.position);
-                Debug.Log("Patrol");
+                Debug.Log("StatePatrol");
                 break;
             case IAState.PlayerSeen:
-                Debug.Log("PlayerSeen");
+                Debug.Log("StatePlayerSeen");
                 _agent.SetDestination(_waypoint1.transform.position);
                 break;
             case IAState.PlayerNear:
-                Debug.Log("PlayerNear");
+                Debug.Log("StatePlayerNear");
                 _agent.SetDestination(_waypoint4.transform.position);
                 break;
         }

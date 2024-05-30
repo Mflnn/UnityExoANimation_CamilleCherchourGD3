@@ -11,18 +11,18 @@ public class AIPerception : MonoBehaviour
     private Vector3 checkDirection;
     [SerializeField] private float distance;
     public SphereCollider SphereCollider;
-    private bool PlayerSeen;
+    [SerializeField] private Animator _animator;
 
-   private void CheckDistance()
+    private void CheckDistance()
     {
         checkDirection = Player.transform.position - Pawn.transform.position;
-        checkDirection= checkDirection.normalized;
+        checkDirection = checkDirection.normalized;
         RaycastHit hit;
-        Debug.DrawLine(Pawn.transform.position, Pawn.transform.position + checkDirection*distance);
+        Debug.DrawLine(Pawn.transform.position, Pawn.transform.position + checkDirection * distance);
 
-        if (Physics.Raycast(Pawn.transform.position,checkDirection,out hit, distance))
+        if (Physics.Raycast(Pawn.transform.position, checkDirection, out hit, distance))
         {
-            if(hit.collider.gameObject.GetComponent<PlayerController>())
+            if (hit.collider.gameObject.GetComponent<PlayerController>())
             {
                 Pawn.GetComponentInChildren<AIController>().PlayerNear = true;
                 Debug.Log("player near");
@@ -42,12 +42,10 @@ public class AIPerception : MonoBehaviour
     {
         CheckDistance();
     }
-    private void OntriggerEnter(SphereCollider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            PlayerSeen = true;
-            Debug.Log("playerseen");
-        }
+        _animator.SetBool("IsPlayerSeen", true);
+        Debug.Log("playerseen");
     }
+
 }
