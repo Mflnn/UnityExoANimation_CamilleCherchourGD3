@@ -10,17 +10,22 @@ public class AIPerception : MonoBehaviour
     [SerializeField] private GameObject Pawn;
     private Vector3 checkDirection;
     [SerializeField] private float distance;
+    public SphereCollider SphereCollider;
+    private bool PlayerSeen;
 
    private void CheckDistance()
     {
         checkDirection = Player.transform.position - Pawn.transform.position;
+        checkDirection= checkDirection.normalized;
         RaycastHit hit;
+        Debug.DrawLine(Pawn.transform.position, Pawn.transform.position + checkDirection*distance);
 
         if (Physics.Raycast(Pawn.transform.position,checkDirection,out hit, distance))
         {
             if(hit.collider.gameObject.GetComponent<PlayerController>())
             {
                 Pawn.GetComponentInChildren<AIController>().PlayerNear = true;
+                Debug.Log("player near");
             }
             else
             {
@@ -30,6 +35,19 @@ public class AIPerception : MonoBehaviour
         else
         {
             Pawn.GetComponentInChildren<AIController>().PlayerNear = false;
+        }
+    }
+
+    private void Update()
+    {
+        CheckDistance();
+    }
+    private void OntriggerEnter(SphereCollider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerSeen = true;
+            Debug.Log("playerseen");
         }
     }
 }
